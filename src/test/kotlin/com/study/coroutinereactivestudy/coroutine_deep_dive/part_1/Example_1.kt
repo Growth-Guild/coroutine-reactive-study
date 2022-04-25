@@ -1,4 +1,4 @@
-package com.study.coroutinereactivestudy.coroutine_deep_dive.chapter_1
+package com.study.coroutinereactivestudy.coroutine_deep_dive.part_1
 
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
