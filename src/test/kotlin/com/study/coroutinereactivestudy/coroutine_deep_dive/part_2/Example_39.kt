@@ -1,16 +1,20 @@
 package com.study.coroutinereactivestudy.coroutine_deep_dive.part_2
 
 import kotlinx.coroutines.coroutineScope
-import kotlinx.coroutines.launch
-import kotlin.random.Random
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.runBlocking
 
-suspend fun main() = coroutineScope {
-    repeat(1000) {
-        launch {
-            List(1000) { Random.nextLong() }.maxOrNull()
-
-            val threadName = Thread.currentThread().name
-            println("Running on $threadName")
-        }
+fun main() = runBlocking {
+    val a = coroutineScope {
+        delay(2000)
+        10
     }
+    println("a is calculated")
+
+    val b = coroutineScope {
+        delay(2000)
+        20
+    }
+    println(a)
+    println(b)
 }
