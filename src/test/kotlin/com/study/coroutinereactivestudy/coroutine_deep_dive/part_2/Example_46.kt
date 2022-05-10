@@ -5,7 +5,7 @@ import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.withTimeout
 
-suspend fun test(): Int = withTimeout(1500) {
+private suspend fun test(): Int = withTimeout(1500) {
     delay(1000)
     println("Still thinking")
     delay(1000)
