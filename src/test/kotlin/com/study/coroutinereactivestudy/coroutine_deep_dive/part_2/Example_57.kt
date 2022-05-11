@@ -44,6 +44,34 @@ class Example_57 {
         }
         deferredValue.await() shouldBe 30
     }
+
+    @ExperimentalCoroutinesApi
+    @Test
+    fun `테스트 안에서 mock을 이용하여 delay를 호출한다`() = runTest {
+        // given
+        val accountRepository = mockk<AccountRepository>()
+        coEvery { accountRepository.getAccountByUserId(1L) } coAnswers {
+            delay(3000L)
+            listOf(
+                Account(
+                    id = 1L,
+                    userId = 1L,
+                    balance = 1000L,
+                ),
+                Account(
+                    id = 2L,
+                    userId = 1L,
+                    balance = 5000L,
+                )
+            )
+        }
+
+        // when
+        val accountList = accountRepository.getAccountByUserId(1L)
+
+        // then
+        accountList.size shouldBe 2
+    }
 }
 
 data class User(
