@@ -1,4 +1,4 @@
-package com.study.coroutinereactivestudy.coroutine_deep_dive.part_2
+package com.study.coroutinereactivestudy.coroutine_deep_dive.part_3
 
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.coroutineScope
