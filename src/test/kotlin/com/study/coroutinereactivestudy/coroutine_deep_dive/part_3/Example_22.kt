@@ -2,10 +2,8 @@ package com.study.coroutinereactivestudy.coroutine_deep_dive.part_3
 
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.asFlow
-import kotlinx.coroutines.flow.emitAll
+import kotlinx.coroutines.flow.channelFlow
 import kotlinx.coroutines.flow.first
-import kotlinx.coroutines.flow.flow
 
 private data class User(val name: String)
 
@@ -25,12 +23,21 @@ private class FakeUserApi : UserApi {
     }
 }
 
-private fun allUsersFlow(api: UserApi): Flow<User> = flow {
+/*private fun allUsersFlow(api: UserApi): Flow<User> = flow {
     var page = 0
     do {
         println("Fetching page $page")
         val users = api.takePage(page++)
         emitAll(users.asFlow())
+    } while (!users.isNullOrEmpty())
+}*/
+
+private fun allUsersFlow(api: UserApi): Flow<User> = channelFlow {
+    var page = 0
+    do {
+        println("Fetching page $page")
+        val users = api.takePage(page++)
+        users.forEach { send(it) }
     } while (!users.isNullOrEmpty())
 }
 
