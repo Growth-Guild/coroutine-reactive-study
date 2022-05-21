@@ -2,7 +2,6 @@ package com.study.coroutinereactivestudy.coroutine_deep_dive.part_3
 
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.asFlow
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.emptyFlow
 import kotlinx.coroutines.flow.flowOf
 
