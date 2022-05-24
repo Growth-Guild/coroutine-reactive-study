@@ -7,9 +7,14 @@ import kotlinx.coroutines.flow.onEach
 
 private class MyError : Throwable("My error")
 
-val flow = flow {
+private val flow = flow {
     emit(1)
     emit(2)
+    throw MyError()
+}
+
+private val flow2 = flow {
+    emit("My message")
     throw MyError()
 }
 
@@ -21,4 +26,12 @@ suspend fun main(): Unit {
             emit(-1)
         }
         .collect { println("Collected $it") }
+
+    println()
+
+    try {
+        flow2.collect { println("Collected $it") }
+    } catch (e: MyError) {
+        println("Caught")
+    }
 }
