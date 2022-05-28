@@ -11,10 +11,13 @@ suspend fun main() {
     flowOf("A", "B", "C")
         .flatMapConcat { flowFrom(it) }
         .collect { println(it) }
-
     println("---------")
-
     flowOf("A", "B", "C")
         .flatMapMerge { flowFrom(it) }
+        .collect { println(it) }
+    println("---------")
+    flowOf("A", "B", "C")
+        .onEach { delay(1200) }
+        .flatMapLatest { flowFrom(it) }
         .collect { println(it) }
 }
